@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conto alla rovescia – La città senza stelle</title>
+  <style>
+    * {
+      font-family: 'Playfair Display', serif !important;
+    }
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 5px #000;
+      animation: cascadeIn 0.5s ease forwards;
+    }
+
+    #countdown {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      background-color: #000;
+      padding: 10px 20px;
+      border: 2px solid #555;
+      border-radius: 6px;
+      z-index: 2;
+      transform: scale(0.85);
+      max-width: 100%;
+    }
+
+    .flip-label {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .digit {
+      line-height: 1;
+      font-size: 2rem;
+    }
+
+    .flip {
+      animation: flip 0.5s ease-in-out;
+    }
+
+    @keyframes flip {
+      0% { transform: rotateX(0); }
+      50% { transform: rotateX(90deg); opacity: 0.3; }
+      100% { transform: rotateX(0); opacity: 1; }
+    }
+
+    .stars, .stars.extra, .stars.nebula {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .stars {
+      background: transparent;
+      box-shadow: 50px 100px #fff, 100px 200px #fff, 150px 300px #fff, 200px 400px #fff,
+                  250px 500px #fff, 300px 600px #fff, 350px 700px #fff, 400px 800px #fff,
+                  450px 900px #fff, 500px 1000px #fff, 550px 1100px #fff;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    .stars.extra {
+      background: transparent;
+      box-shadow: 30px 70px #fff, 60px 140px #fff, 90px 210px #fff, 120px 280px #fff,
+                   150px 350px #fff, 180px 420px #fff, 210px 490px #fff, 240px 560px #fff,
+                   270px 630px #fff, 300px 700px #fff, 330px 770px #fff, 360px 840px #fff,
+                   390px 910px #fff, 420px 980px #fff, 450px 1050px #fff, 480px 1120px #fff;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    .stars.nebula {
+      background: radial-gradient(circle at 30% 30%, rgba(255, 200, 255, 0.1) 0%, transparent 40%),
+                  radial-gradient(circle at 70% 70%, rgba(200, 255, 255, 0.07) 0%, transparent 45%);
+      z-index: 1;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .flip-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .flip-container {
+      background-color: #000;
+      color: #fff;
+      border: 2px solid #555;
+      border-radius: 4px;
+      width: 60px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      transition: transform 0.6s ease;
+    }
+
+    .comet {
+      position: absolute;
+      top: -100px;
+      left: -200px;
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0));
+      box-shadow: 0 0 8px rgba(255,255,255,0.6);
+      transform: rotate(45deg);
+      animation: cometMove 10s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes cometMove {
+      0% { top: -100px; left: -200px; opacity: 0; }
+      10% { opacity: 1; }
+      50% { top: 50%; left: 50%; opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 120%; left: 120%; opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+      .flip-container { width: 50px; height: 60px; font-size: 1.5rem; }
+      .flip-label { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="comet"></div>
+  <div class="stars"></div>
+  <div class="stars extra"></div>
+  <div class="stars nebula"></div>
+
+  <h1 style="position: absolute; top: 10px; text-transform: uppercase; color: #fff; text-shadow: 0 0 12px #fff;">LA CITTÀ SENZA STELLE</h1>
+  <p style="position: absolute; top: 90px; color: #fff; font-style: italic; animation: fadeIn 4s ease-in-out forwards; opacity: 0;">
+    “Quando la luce tornerà, non illuminerà solo le strade… ma le coscienze.”
+  </p>
+
+  <div style="margin-top: 8rem; display: flex; flex-direction: column; align-items: center;">
+  <p style="color: #ccc; font-size: 1rem; margin-bottom: 0.5rem;">✨ TEMPO RESTANTE AL RITORNO DELLA LUCE ✨</p>
+
+  <div id="countdown">
+    <div class="flip-wrapper">
+      <div class="flip-container"><div class="digit" id="days">00</div></div>
+      <div class="flip-label">GIORNI</div>
+    </div>
+    <div class="flip-wrapper">
+      <div class="flip-container"><div class="digit" id="hours">00</div></div>
+      <div class="flip-label">ORE</div>
+    </div>
+    <div class="flip-wrapper">
+      <div class="flip-container"><div class="digit" id="minutes">00</div></div>
+      <div class="flip-label">MINUTI</div>
+    </div>
+    <div class="flip-wrapper">
+      <div class="flip-container"><div class="digit" id="seconds">00</div></div>
+      <div class="flip-label">SECONDI</div>
+    </div>
+  </div>
+
+  
+  <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem;">
+    <a href="https://www.instagram.com/alessiovaralla" target="_blank" style="text-decoration: none;">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" style="width: 28px; height: 28px; filter: invert(100%);">
+    </a>
+    <a href="https://www.facebook.com/alessiovaralla" target="_blank" style="text-decoration: none;">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" style="width: 28px; height: 28px; filter: invert(100%);">
+    </a>
+  </div>
+
+  
+
+  <script>
+    const releaseDate = new Date('2025-08-13T23:59:59');
+    const tickSound = document.getElementById('tickSound');
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    let previous = { days: '', hours: '', minutes: '', seconds: '' };
+
+    function animateFlip(el, newVal, key) {
+      if (previous[key] !== newVal) {
+        el.classList.remove('flip');
+        void el.offsetWidth;
+        el.classList.add('flip');
+        el.textContent = newVal;
+        previous[key] = newVal;
+      }
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = releaseDate - now;
+      if (diff <= 0) {
+        [daysEl, hoursEl, minutesEl, secondsEl].forEach(el => el.textContent = '00');
+        return;
+      }
+
+      const days = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+      const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+      const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+
+      animateFlip(daysEl, days, 'days');
+      animateFlip(hoursEl, hours, 'hours');
+      animateFlip(minutesEl, minutes, 'minutes');
+      animateFlip(secondsEl, seconds, 'seconds');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+  <!-- Removed autoplaying audio to avoid browser blocking -->
+  <!-- <audio id="tickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-clock-tick-1183.mp3" preload="auto"></audio> -->
+<div style="position: absolute; bottom: 0; right: 0; opacity: 0.5; z-index: -1;">
+  <img src="https://files.catbox.moe/73nip7.png" alt="Lyra in penombra" style="max-height: 100vh; width: auto; object-fit: contain; filter: brightness(1.5) contrast(1.2);">
+</div>
+
+
+  <p style="margin-top: 0.5rem; font-weight: bold;">Alessio Varalla</p>
+</footer>
+<footer style="margin-top: 2rem; color: #ccc; font-size: 0.9rem; text-align: center;">
+  <p style="margin-top: 3rem; font-style: italic;">Dove l'oscurità domina, è lì che nasce il bisogno di raccontare.</p>
+  <p style="margin-top: 0.5rem; font-weight: bold;">Alessio Varalla</p>
+</footer>
+</html>
